@@ -3,7 +3,20 @@ gradients = [-0.0065, 0, 0.0010, 0.0028, 0, -0.0028, -0.0020]
 altitudes = [11000, 20000, 32000, 47000, 51000, 71000, 86000]
 g_0, T_0, p_0, rho_0, R = 9.80665, 288.15, 101325, 1.225, 287.0
 
-altitude = float(input('Enter altitude: '))
+def inputErr(point):
+    print('Input error at: "' + str(point) + '". Exitting')
+    exit()
+
+print('--- ISA Calculator ---\n1. Calculate ISA for input in [m] \n2. Calculate ISA for input in [ft] \n3. Calculate ISA for input in [FL] \n')
+choice = int(input('Select your choice: '))
+
+if(choice < 1 or choice > 3):
+   inputErr('option selection')
+
+try:
+    altitude = float(input('Enter altitude: '))
+except ValueError:
+    inputErr('altitude input')
 
 def calcISA(alt):
     T, t_0 = T_0, T_0 #local variable
@@ -20,4 +33,11 @@ def calcISA(alt):
     rho = p/(R*T)
     return T, p, rho
 
-print(calcISA(altitude))
+def ftMeters(feet):
+    return float(0.3048 * feet)
+
+def flMeters(fl):
+    return float(0.3048 * 100 * fl)
+
+temp, pressure, density = calcISA(altitude) if choice == 1 else calcISA(ftMeters(altitude)) if choice == 2 else calcISA(flMeters(altitude))
+print('\nTemperature: ' + str(temp) + ' [K]\n' + 'Pressure: ' + str(pressure) + ' [Pa]\n' + 'Density: ' + str(density) + ' [kg/m^3]\n')
