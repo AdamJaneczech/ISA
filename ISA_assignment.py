@@ -40,4 +40,4 @@ def flMeters(fl):
     return float(0.3048 * 100 * fl)
 
 temp, pressure, density = calcISA(altitude) if choice == 1 else calcISA(ftMeters(altitude)) if choice == 2 else calcISA(flMeters(altitude))
-print('\nTemperature: ' + str(temp) + ' [K]\n' + 'Pressure: ' + str(pressure) + ' [Pa]\n' + 'Density: ' + str(density) + ' [kg/m^3]\n')
+print('\nTemperature: ' + "%.2f" % temp + ' [K]\n' + 'Pressure: ' + "%.2f" % pressure + ' [Pa]\n' + 'Density: ' + "%.2f" % density + ' [kg/m^3]\n') #print to 2 decimal points
