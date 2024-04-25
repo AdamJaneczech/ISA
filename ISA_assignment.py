@@ -8,7 +8,10 @@ def inputErr(point):
     exit()
 
 print('--- ISA Calculator ---\n1. Calculate ISA for input in [m] \n2. Calculate ISA for input in [ft] \n3. Calculate ISA for input in [FL] \n')
-choice = int(input('Select your choice: '))
+try:
+    choice = int(input('Select your choice: '))
+except ValueError:
+    inputErr('option selection')
 
 if(choice < 1 or choice > 3):
    inputErr('option selection')
@@ -16,6 +19,9 @@ if(choice < 1 or choice > 3):
 try:
     altitude = float(input('Enter altitude: '))
 except ValueError:
+    inputErr('altitude input')
+
+if(altitude < 0):
     inputErr('altitude input')
 
 def calcISA(alt):
